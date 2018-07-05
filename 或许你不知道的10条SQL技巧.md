@@ -75,6 +75,12 @@ $res = mysql_query(
 （11）强制类型转换会全表扫描
 select * from user where phone=13800001234
 你以为会命中phone索引么？大错特错了，这个语句究竟要怎么改？
+
+（12）limit高效分页
+     limit越大，效率越低
+     select id from t limit 10000, 10;
+     应该改为 =>
+     select id from t where id > 10000 limit 10;
  
 末了，再加一条，不要使用select *（潜台词，文章的SQL都不合格 =_=），只返回需要的列，能够大大的节省数据传输量，与数据库的内存使用量哟。
  
