@@ -1,6 +1,6 @@
 一、web-server的负载均衡<br/>
 
-![image](https://github.com/seakingOne/architects/blob/master/tcp/1.jpg)
+![image](https://github.com/seakingOne/architects/blob/master/resource/tcp/1.jpg)
 
 互联网架构中，web-server接入一般使用nginx来做反向代理，实施负载均衡。整个架构分三层：
 上游调用层，一般是browser或者APP
@@ -20,7 +20,7 @@ nginx将请求转发给内网IP(192.168.0.1)的web-server
  
 二、单机法tcp-server<br/>
 
-![image](https://github.com/seakingOne/architects/blob/master/tcp/2.jpg)
+![image](https://github.com/seakingOne/architects/blob/master/resource/tcp/2.jpg)
 
 单个tcp-server显然是可以保证请求一致性：
 client向tcp.daojia.com发起tcp请求
@@ -32,7 +32,7 @@ client通过外网IP(1.2.3.4)向tcp-server发起请求
  
 三、集群法tcp-server<br/>
 
-![image](https://github.com/seakingOne/architects/blob/master/tcp/3.jpg)
+![image](https://github.com/seakingOne/architects/blob/master/resource/tcp/3.jpg)
 
 通过搭建tcp-server集群来保证高可用，客户端来实现负载均衡：
 client内配置有tcp1/tcp2/tcp3.daojia.com三个tcp-server的外网IP
@@ -59,7 +59,7 @@ client内配置有tcp1/tcp2/tcp3.daojia.com三个tcp-server的外网IP
  
 四、服务端实施负载均衡<br/>
 
-![image](https://github.com/seakingOne/architects/blob/master/tcp/4.jpg)
+![image](https://github.com/seakingOne/architects/blob/master/resource/tcp/4.jpg)
 
 只有将复杂的策略下沉到服务端，才能根本上解决扩展性的问题。
 
@@ -77,7 +77,7 @@ client每次访问tcp-server前，先调用一个新增的get-tcp-ip接口，对
  
 五、tcp-server状态上报<br/>
 
-![image](https://github.com/seakingOne/architects/blob/master/tcp/5.jpg)
+![image](https://github.com/seakingOne/architects/blob/master/resource/tcp/5.jpg)
 
 get-tcp-ip接口怎么知道tcp-server集群中各台服务器是否可用呢，tcp-server主动上报是一个潜在方案，如果某一个tcp-server挂了，则会终止上报，对于停止上报状态的tcp-server，get-tcp-ip接口，将不返回给client相应的tcp-server的外网IP。
  
@@ -86,7 +86,7 @@ get-tcp-ip接口怎么知道tcp-server集群中各台服务器是否可用呢，
  
 六、tcp-server状态拉取<br/>
 
-![image](https://github.com/seakingOne/architects/blob/master/tcp/6.jpg)
+![image](https://github.com/seakingOne/architects/blob/master/resource/tcp/6.jpg)
 
 更优的方案是：web-server通过“拉”的方式获取各个tcp-server的状态，而不是tcp-server通过“推”的方式上报自己的状态。
  
