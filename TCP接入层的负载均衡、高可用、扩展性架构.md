@@ -98,7 +98,7 @@ get-tcp-ip接口怎么知道tcp-server集群中各台服务器是否可用呢，
 静态实施：web-server下的多个tcp-server的IP可以配置负载权重，根据tcp-server的机器配置分配负载（nginx也有类似的功能）
 动态实施：web-server可以根据“拉”回来的tcp-server的状态，动态分配负载，并在tcp-server性能极具下降时实施过载保护
  
-七、总结
+七、总结<br/>
 web-server如何实施负载均衡？
 利用nginx反向代理来轮询、随机、ip-hash。
  
