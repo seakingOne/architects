@@ -22,9 +22,11 @@
 	增加一层服务，采用批量生成的方式降低数据库的写压力，提升整体性能
 
 <br/>
-增加服务后，DB中只需保存当前最大的ID即可，在服务启动初始化的过程中，首先拉取当前的max-id：![image](https://github.com/seakingOne/architects/blob/master/resource/auto_id/2.jpg)
+增加服务后，DB中只需保存当前最大的ID即可，在服务启动初始化的过程中，首先拉取当前的max-id：<br/>
+ ![image](https://github.com/seakingOne/architects/blob/master/resource/auto_id/2.jpg)
 <br/>
-然后批量获取一批ID，放到id-servcie内存里，并将max-id写回数据库![image](https://github.com/seakingOne/architects/blob/master/resource/auto_id/3.jpg)
+然后批量获取一批ID，放到id-servcie内存里，并将max-id写回数据库!<br/>
+ [image](https://github.com/seakingOne/architects/blob/master/resource/auto_id/3.jpg)
 <br/>
 这个方案的优点：<br/>
 数据库只保存一条记录
